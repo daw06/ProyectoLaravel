@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -42,6 +43,10 @@ class User extends Authenticatable
     public function address(){
         return $this->hasOne(Address::class);
     }
+    public function events()
+    {
+        return $this->belongsToMany('App\Models\Event')->withPivot('note')->withTimestamps();
+}
 
     protected function casts(): array
     {
